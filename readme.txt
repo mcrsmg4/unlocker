@@ -1,7 +1,7 @@
 # macOS Unlocker V3.0 for VMware Workstation
 ===========================================
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 > ⚠️ **Note:** This version has **not been tested on VMware Workstation 16 or 17**. Use with caution on these versions.
 
@@ -96,4 +96,4 @@ History
 
 10/10/18 – 3.0.2 – Fixed false positives in Windows executables, allow Python 2 and 3 in Bash scripts
 
-© 2011-2018 Dave Parsons, (updated to Python 3 and modern standards by https://github.com/mcrsmg4 
+© 2011-2018 Dave Parsons, (updated to Python 3 and modern standards by https://github.com/mcrsmg4)
