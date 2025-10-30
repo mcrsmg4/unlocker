@@ -1,120 +1,99 @@
-macOS Unlocker V3.0 for VMware Workstation
-==========================================
+# macOS Unlocker V3.0 for VMware Workstation
+===========================================
 
-**************************************************************
-************************* READ HERE: *************************
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-WINDOWS USERS: Get the tool from the Releases section, you will get a bundled python distribution that avoids the virus warnings and python not found etc.
+> ⚠️ **Note:** This version has **not been tested on VMware Workstation 16 or 17**. Use with caution on these versions.
 
-LINUX USERS: No bundled python for you, but make sure you have python 3.0+ installed. If you have errors like "Python not supported" but you have python installed, change the lines inside of lnx-install.sh from 'python xxxxxxx.py' to 'python3.7 xxxxxxx.py' (if you have python 3.7 installed, otherwise try python3 or other stuff)
+---
 
-**************************************************************
-**************************************************************
+## 📌 Read This First
 
-+-----------------------------------------------------------------------------+
-| IMPORTANT:                                                                  |
-| ==========                                                                  |
-|                                                                             |
-| Always uninstall the previous version of the Unlocker before using a new    |
-| version. Failure to do this could render VMware unusable.                   |
-|                                                                             |
-+-----------------------------------------------------------------------------+
+**WINDOWS USERS:**  
+Get the tool from the **Releases** section. You will get a bundled Python distribution that avoids virus warnings and “Python not found” errors.  
 
-1. Introduction
----------------
+**LINUX USERS:**  
+No bundled Python is provided. Make sure you have **Python 3.0+** installed.  
+If you get errors like *"Python not supported"* but Python is installed, edit `lnx-install.sh` and replace `python xxxxxxx.py` with `python3.7 xxxxxxx.py` (or `python3` for other versions).  
 
-Unlocker 3 is designed for VMware Workstation 11-15 and Player 7-15.
+---
 
-If you are using an earlier product please continue using Unlocker 1.
+## ⚠️ Important
+Always uninstall the previous version of the Unlocker before using a new version. Failure to do so could render VMware unusable.
+
+---
+
+## 1. Introduction
+Unlocker 3 is designed for VMware Workstation 11-15 and Player 7-15.  
+
+If you are using an earlier product, continue using Unlocker 1.
 
 Version 3 has been tested against:
 
-* Workstation 11/12/14/15 on Windows and Linux
+* Workstation 11/12/14/15 on Windows and Linux  
 * Workstation Player 7/12/14/15 on Windows and Linux
 
-The patch code carries out the following modifications dependent on the product
-being patched:
+### What it does
+* Fix `vmware-vmx` and derivatives to allow macOS to boot  
+* Fix `vmwarebase.dll` or `.so` to allow Apple to be selected during VM creation  
+* Download the latest VMware Tools for macOS  
 
-* Fix vmware-vmx and derivatives to allow macOS to boot
-* Fix vmwarebase .dll or .so to allow Apple to be selected during VM creation
-* Download a copy of the latest VMware Tools for macOS
-
-Note that not all products recognise the darwin.iso via install tools menu item.
-You will have to manually mount the darwin.iso for example on Workstation 11 and Player 7.
-
-In all cases make sure VMware is not running, and any background guests have
-been shutdown.
+> Not all products recognize `darwin.iso` via the “Install Tools” menu. You may need to mount it manually.  
+> Make sure VMware is **not running** and all background guests are shutdown.
 
 The code is written in Python.
 
-2. Prerequisites
-----------------
+---
 
-The code requires Python 2.7 to work. Most Linux distros ship with a compatible
-Python interpreter and should work without requiring any additional software.
+## 2. Prerequisites
+* **Linux:** Python 2.7+ is required. Most distros ship with a compatible version.  
+* **Windows:** Bundled Python script (via PyInstaller) requires **no Python installation**.
 
-Windows Unlocker has a packaged version of the Python script using PyInstaller, 
-and so does not require Python to be installed.
+---
 
-3. Limitations
---------------
+## 3. Limitations
+* VMware Player or Workstation on Windows may produce a core dump on new VM creation.  
+* Latest Linux products are OK and do **not** show this problem.
 
-If you are using VMware Player or Workstation on Windows you may get a core dump.
+### ⚠️ Workarounds
+1. Change the VM to **Hardware Version 10** (no performance impact).  
+2. Edit the VMX file and add:
+```text
+smc.version = "0"
 
-Latest Linux products are OK and do not show this problem.
+4. Windows Usage
 
-+-----------------------------------------------------------------------------+
-| IMPORTANT:                                                                  |
-| ==========                                                                  |
-|                                                                             |
-| If you create a new VM VMware may stop and create a core dump.              |
-| There are two options to work around this issue:                            |
-|                                                                             |
-| 1. Change the VM to be HW 10 - this does not affect performance.            |
-| 2. Edit the VMX file and add:                                               |
-|    smc.version = "0"                                                        |
-|                                                                             |
-+-----------------------------------------------------------------------------+
+Run cmd.exe as Administrator or right-click the command file and select Run as administrator.
 
-4. Windows
-----------
-On Windows you will need to either run cmd.exe as Administrator or using
-Explorer right click on the command file and select "Run as administrator".
+win-install.cmd – patches VMware
 
-win-install.cmd   - patches VMware
-win-uninstall.cmd - restores VMware
-win-update-tools.cmd - retrieves latest macOS guest tools
+win-uninstall.cmd – restores VMware
 
-5. Linux
----------
-On Linux you will need to be either root or use sudo to run the scripts.
+win-update-tools.cmd – retrieves the latest macOS guest tools
 
-You may need to ensure the Linux scripts have execute permissions
-by running chmod +x against the 2 files.
+5. Linux Usage
 
-lnx-install.sh   - patches VMware
-lnx-uninstall.sh - restores VMware
-lnx-update-tools.sh - retrieves latest macOS guest tools
-   
+Run scripts as root or with sudo. Ensure execute permissions:
+chmod +x lnx-install.sh lnx-uninstall.sh lnx-update-tools.sh
+
 6. Thanks
----------
 
-My thanks go to Pablo Projects for coding the OG script and all the old contributers
+Special thanks to:
 
-Thanks to Zenith432 for originally building the C++ unlocker and Mac Son of Knife
-(MSoK) for all the testing and support.
+Pablo Projects – original script
 
-Thanks also to Sam B for finding the solution for ESXi 6 and helping me with
-debugging expertise. Sam also wrote the code for patching ESXi ELF files and
-modified the unlocker code to run on Python 3 in the ESXi 6.5 environment.
+Zenith432 – C++ unlocker
 
+Mac Son of Knife (MSoK) – testing and support
+
+Sam B – ESXi patching, Python 3 modifications, debugging
 
 History
--------
-27/09/18 3.0.0 - First release
-02/10/18 3.0.1 - Fixed gettools.py to work with Python 3 and correctly download darwinPre15.iso
-10/10/18 3.0.2 - Fixed false positives from anti-virus software with Windows executables
-               - Allow Python 2 and 3 to run the Python code from Bash scripts
 
+27/09/18 – 3.0.0 – First release
 
-(c) 2011-2018 Dave Parsons
+02/10/18 – 3.0.1 – Fixed gettools.py for Python 3, download darwinPre15.iso
+
+10/10/18 – 3.0.2 – Fixed false positives in Windows executables, allow Python 2 and 3 in Bash scripts
+
+© 2011-2018 Dave Parsons, (updated to Python 3 and modern standards by https://github.com/mcrsmg4 
