@@ -99,6 +99,8 @@ lnx-update-tools.sh - retrieves latest macOS guest tools
 6. Thanks
 ---------
 
+My thanks go to Pablo Projects for coding the OG script and all the old contributers
+
 Thanks to Zenith432 for originally building the C++ unlocker and Mac Son of Knife
 (MSoK) for all the testing and support.
 
